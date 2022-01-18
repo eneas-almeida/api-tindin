@@ -20,6 +20,6 @@ module.exports = [
         synchronize: true,
         logging: false,
         useUnifiedTopology: true,
-        entities: [patch + '/' + folder + '/modules/**/infra/typeorm/mongodb/schemas/*.' + file],
+        entities: [patch + '/' + folder + '/modules/**/infra/typeorm/mongo/schemas/*.' + file],
     },
 ];

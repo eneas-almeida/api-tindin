@@ -1,11 +1,12 @@
+import { environment } from '@configs/geral';
+import { sentry_dsn } from '@configs/sentry';
 import * as Sentry from '@sentry/node';
+import '@shared/containers';
 import cors from 'cors';
 import express, { Express } from 'express';
 import 'express-async-errors';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import { environment } from '../../../configs/geral';
-import { sentry_dsn } from '../../../configs/sentry';
 import { exception } from './Exception';
 import { route } from './Route';
 

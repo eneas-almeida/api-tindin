@@ -1,9 +1,8 @@
-import 'reflect-metadata';
+import { connection } from '@shared/database/Connection';
 import 'dotenv/config';
 import express, { Express } from 'express';
-
+import 'reflect-metadata';
 import { middleware } from './Middleware';
-import { connection } from '@shared/database/Connection';
 
 class App {
     public execute(): Express {
