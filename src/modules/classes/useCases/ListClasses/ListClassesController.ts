@@ -8,6 +8,6 @@ export class ListClassesController {
 
         const result = await listClassesService.execute();
 
-        return res.status(201).json(result);
+        return res.status(200).json(result);
     }
 }
