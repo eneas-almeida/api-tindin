@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { AuthenticateUserController } from './AuthenticateUserController';
 import { AuthenticateUserValidator } from './AuthenticateUserValidator';
 
-class AuthenticateUserMiddleware {
+export class AuthenticateUserMiddleware {
     public register(router: Router, method: method, path: string): void {
         const { validate } = new AuthenticateUserValidator();
         const { handle } = new AuthenticateUserController();
@@ -10,5 +10,3 @@ class AuthenticateUserMiddleware {
         router[method](path, validate, handle);
     }
 }
-
-export { AuthenticateUserMiddleware };

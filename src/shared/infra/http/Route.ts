@@ -1,3 +1,4 @@
+import { ClasseRoutes } from '@modules/classes/infra/routes/ClasseRoutes';
 import { UserRoutes } from '@modules/users/infra/routes/UserRoutes';
 import { Router } from 'express';
 
@@ -7,6 +8,9 @@ class Route {
 
         // USER
         new UserRoutes().registerAll(router);
+
+        // CLASSE
+        new ClasseRoutes().registerAll(router);
 
         return router;
     }

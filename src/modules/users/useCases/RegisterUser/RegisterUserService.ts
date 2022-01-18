@@ -7,7 +7,7 @@ import { AppException } from '@shared/exceptions/AppException';
 import { injectable, inject } from 'tsyringe';
 
 @injectable()
-class RegisterUserService {
+export class RegisterUserService {
     constructor(
         @inject('UserRepository') private userRepository: UserRepository,
         @inject('HashProvider') private hashProvider: HashProvider,
@@ -15,36 +15,20 @@ class RegisterUserService {
     ) {}
 
     public async execute(createUserDTO: CreateUserDTO): Promise<ResponseUserDTO> {
-        /* Destructuring object */
-
         const { email, password } = createUserDTO;
 
-        /* Find user by email */
+        const existsSchema = await this.userRepository.findOneByEmail(email);
 
-        const existsUser = await this.userRepository.findOneByEmail(email);
-
-        /* Strategy guard */
-
-        if (existsUser) {
+        if (existsSchema) {
             throw new AppException(`User email ${email} already exists!`, 400);
         }
 
-        /* Generate hash password by provider */
-
         const hashPassword = await this.hashProvider.gererateHash(password);
-
-        /* Inject data */
 
         Object.assign(createUserDTO, { password: hashPassword });
 
-        /* Create uer */
+        const schemaCreted = await this.userRepository.create(createUserDTO);
 
-        const userCreated = await this.userRepository.create(createUserDTO);
-
-        /* Return user created */
-
-        return userCreated;
+        return schemaCreted;
     }
 }
-
-export { RegisterUserService };

@@ -2,7 +2,7 @@ import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 import { RegisterUserService } from './RegisterUserService';
 
-class RegisterUserController {
+export class RegisterUserController {
     public async handle(req: Request, res: Response): Promise<Response> {
         const { name, email, password } = req.body;
 
@@ -19,5 +19,3 @@ class RegisterUserController {
         return res.status(201).json({ user });
     }
 }
-
-export { RegisterUserController };

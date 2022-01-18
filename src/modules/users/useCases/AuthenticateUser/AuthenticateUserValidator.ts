@@ -2,7 +2,7 @@ import { AppException } from '@shared/exceptions/AppException';
 import { isEmailValid } from '@shared/helpers/validator';
 import { NextFunction, Request, Response } from 'express';
 
-class AuthenticateUserValidator {
+export class AuthenticateUserValidator {
     public validate(req: Request, _: Response, next: NextFunction): any {
         const { email, password } = req.body;
 
@@ -17,5 +17,3 @@ class AuthenticateUserValidator {
         return next();
     }
 }
-
-export { AuthenticateUserValidator };

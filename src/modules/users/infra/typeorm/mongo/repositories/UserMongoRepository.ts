@@ -19,11 +19,11 @@ export class UserMongoRepository implements UserRepository {
         return await this.repository.findOne({ email });
     }
 
-    public async create(createUserDTO: CreateUserDTO): Promise<User> {
-        const userCreated = this.repository.create(createUserDTO);
+    async create(createUserDTO: CreateUserDTO): Promise<User> {
+        const schemaCreated = this.repository.create(createUserDTO);
 
-        await this.repository.save(userCreated);
+        await this.repository.save(schemaCreated);
 
-        return userCreated;
+        return schemaCreated;
     }
 }

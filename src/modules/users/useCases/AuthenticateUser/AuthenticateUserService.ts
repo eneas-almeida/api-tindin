@@ -7,7 +7,7 @@ import { UserRepository } from '@modules/users/repositories/UserRepository';
 import { AppException } from '@shared/exceptions/AppException';
 
 @injectable()
-class AuthenticateUserService {
+export class AuthenticateUserService {
     constructor(
         @inject('UserRepository') private userRepository: UserRepository,
         @inject('TokenProvider') private tokenProvider: TokenProvider,
@@ -15,47 +15,29 @@ class AuthenticateUserService {
     ) {}
 
     async execute(authenticateUserDTO: AuthenticateUserDTO): Promise<ResponseUserTokenDTO> {
-        /* Find user by email */
+        const existsSchema = await this.userRepository.findOneByEmail(authenticateUserDTO.email);
 
-        const existsUser = await this.userRepository.findOneByEmail(authenticateUserDTO.email);
-
-        /* Strategy guard */
-
-        if (!existsUser) {
+        if (!existsSchema) {
             throw new AppException('Email or password invalid!', 403);
         }
 
-        /* Destructuring object */
-
-        const { _id, email, password } = existsUser;
-
-        /* Check if password is equals */
+        const { _id, email, password } = existsSchema;
 
         const checkPassword = await this.hashProvider.compareHash(authenticateUserDTO.password, password);
-
-        /* Strategy guard */
 
         if (!checkPassword) {
             throw new AppException('Email or password invalid!', 403);
         }
-
-        /* Pyaload for JWT */
 
         const payload = {
             id: _id,
             email,
         };
 
-        /* Generate token by provider */
-
         const token = await this.tokenProvider.generateToken(payload);
-
-        /* Return token */
 
         return {
             token,
         };
     }
 }
-
-export { AuthenticateUserService };

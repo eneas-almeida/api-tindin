@@ -4,7 +4,7 @@ import { isEmailValid, isPasswordValid } from '@shared/helpers/validator';
 import { AppException } from '@shared/exceptions/AppException';
 import { CreateUserDTO } from '@modules/users/dtos/CreateUserDTO';
 
-class RegisterUserValidator {
+export class RegisterUserValidator {
     public validate(req: Request, _: Response, next: NextFunction): any {
         const { name, email, password } = req.body;
 
@@ -25,5 +25,3 @@ class RegisterUserValidator {
         return next();
     }
 }
-
-export { RegisterUserValidator };
