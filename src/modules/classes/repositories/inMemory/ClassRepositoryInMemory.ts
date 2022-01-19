@@ -1,9 +1,9 @@
-import { v4 as uuid } from 'uuid';
 import { CreateClassDTO } from '@modules/classes/dtos/CreateClassDTO';
 import { Class } from '@modules/classes/schemas/Class';
 import { ClassInMemory } from '@modules/classes/schemas/inMemory/ClassInMemory';
+import 'reflect-metadata';
+import { v4 as uuid } from 'uuid';
 import { ClassRepository } from '../ClassRepository';
-import { UpdateClassDTO } from '@modules/classes/dtos/UpdateClassDTO';
 
 export class ClassRepositoryInMemory implements ClassRepository {
     private repository: Class[];

@@ -40,6 +40,8 @@ describe('AuthenticateUserService', () => {
         expect(user).toHaveProperty('token');
     });
 
+    // TEST 2
+
     it('should not be authenticate', async () => {
         await expect(
             authenticateUserService.execute({
@@ -48,6 +50,8 @@ describe('AuthenticateUserService', () => {
             })
         ).rejects.toBeInstanceOf(AppException);
     });
+
+    // TEST 3
 
     it('should not be authenticate', async () => {
         await userRepository.create({
@@ -63,24 +67,4 @@ describe('AuthenticateUserService', () => {
             })
         ).rejects.toBeInstanceOf(AppException);
     });
-
-    // TEST 2
-
-    // it('should be not authenticate a new user', async () => {
-    //     authenticateUserService = new RegisterUserService(userRepository, hashProvider, tokenProvider);
-
-    //     await authenticateUserService.execute({
-    //         name: 'tiago',
-    //         email: 'tiago@gmail.com',
-    //         password: 'penadepato',
-    //     });
-
-    //     await expect(
-    //         authenticateUserService.execute({
-    //             name: 'tiago',
-    //             email: 'tiago@gmail.com',
-    //             password: 'penadepato',
-    //         })
-    //     ).rejects.toBeInstanceOf(AppException);
-    // });
 });
