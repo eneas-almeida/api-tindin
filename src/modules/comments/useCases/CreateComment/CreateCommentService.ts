@@ -8,7 +8,7 @@ import { inject, injectable } from 'tsyringe';
 export class CreateCommentService {
     constructor(
         @inject('CommentRepository') private commentRepository: CommentRepository,
-        @inject('classRepository') private classRepository: CommentRepository
+        @inject('ClassRepository') private classRepository: CommentRepository
     ) {}
 
     async execute(createCommentDTO: CreateCommentDTO): Promise<ResponseCommentDTO> {

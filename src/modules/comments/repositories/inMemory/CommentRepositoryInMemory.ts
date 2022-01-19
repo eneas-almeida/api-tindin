@@ -11,6 +11,18 @@ export class CommentRepositoryInMemory implements CommentRepository {
         this.repository = [];
     }
 
+    async countById(id_class: string): Promise<number> {
+        const classes = this.repository.filter((e) => e.id_class === id_class);
+
+        return classes.length;
+    }
+
+    async findSomeByClassIdAndLimit(id_class: string, limit: number): Promise<Comment[]> {
+        const classes = this.repository.filter((e) => e.id_class === id_class);
+
+        return classes.slice(0, limit + 1);
+    }
+
     async findOneById(id: string): Promise<Comment | undefined> {
         return this.repository.find((comment) => comment._id === id);
     }

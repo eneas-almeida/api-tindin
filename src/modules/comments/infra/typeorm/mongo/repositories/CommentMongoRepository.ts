@@ -12,6 +12,14 @@ export class CommentMongoRepository implements CommentRepository {
         this.repository = getMongoRepository(CommentMongoSchema, 'mongodb');
     }
 
+    async countById(id_class: string): Promise<number> {
+        return this.repository.count({
+            where: {
+                id_class,
+            },
+        });
+    }
+
     async findOneById(id: string): Promise<Comment | undefined> {
         return await this.repository.findOne({ _id: new ObjectID(id) });
     }
@@ -42,5 +50,17 @@ export class CommentMongoRepository implements CommentRepository {
         await this.repository.delete(classe);
 
         return classe;
+    }
+
+    async deleteAll(ids: string[]): Promise<void> {
+        await this.repository.deleteMany({ id_class: { $in: ids } });
+    }
+
+    async findSomeByClassId(id_class: string): Promise<Comment[]> {
+        return await this.repository.find({
+            where: {
+                id_class,
+            },
+        });
     }
 }
