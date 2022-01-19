@@ -12,6 +12,10 @@ export class ClassRepositoryInMemory implements ClassRepository {
         this.repository = [];
     }
 
+    async updateValueTotalComment(class_: Class, value: number): Promise<void> {
+        throw new Error('Method not implemented.');
+    }
+
     async findOneById(id: string): Promise<Class | undefined> {
         return this.repository.find((classe) => classe._id === id);
     }

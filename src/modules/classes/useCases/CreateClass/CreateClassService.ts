@@ -17,6 +17,12 @@ export class CreateClassService {
             throw new AppException(`Class name ${name} already exists!`, 400);
         }
 
+        createClassDTO.date_init = new Date(createClassDTO.date_init);
+
+        createClassDTO.date_end = new Date(createClassDTO.date_end);
+
+        Object.assign(createClassDTO, { total_comments: 0 });
+
         const schemaCreated = await this.classRepository.create(createClassDTO);
 
         return {

@@ -11,6 +11,10 @@ export class CommentRepositoryInMemory implements CommentRepository {
         this.repository = [];
     }
 
+    async findSomeByClassId(id_class: string): Promise<Comment[]> {
+        throw new Error('Method not implemented.');
+    }
+
     async countById(id_class: string): Promise<number> {
         const classes = this.repository.filter((e) => e.id_class === id_class);
 
@@ -51,5 +55,9 @@ export class CommentRepositoryInMemory implements CommentRepository {
         }
 
         return comment;
+    }
+
+    async deleteAll(ids: string[]): Promise<void> {
+        throw new Error('Method not implemented.');
     }
 }

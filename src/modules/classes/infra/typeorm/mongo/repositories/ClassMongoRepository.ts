@@ -28,6 +28,14 @@ export class ClassMongoRepository implements ClassRepository {
         return schemaCreated;
     }
 
+    async updateValueTotalComment(class_: Class, value: number): Promise<void> {
+        const { total_comments } = class_;
+
+        Object.assign(class_, { total_comments: total_comments + value });
+
+        await this.save(class_);
+    }
+
     async save(classe: Class): Promise<Class> {
         classe.date_updated = new Date();
 

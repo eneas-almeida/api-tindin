@@ -8,6 +8,8 @@ export interface ClassRepository {
 
     create(createClassDTO: CreateClassDTO): Promise<Class>;
 
+    updateValueTotalComment(class_: Class, value: number): Promise<void>;
+
     save(classe: Class): Promise<Class>;
 
     list(): Promise<Class[]>;
