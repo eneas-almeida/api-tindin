@@ -1,11 +1,11 @@
 import { AuthUserMiddleware } from '@modules/users/middlewares/AuthUserMiddleware';
 import { Router } from 'express';
-import { CreateClasseController } from './CreateClasseController';
+import { UpdateClassController } from './UpdateClassController';
 
-export class CreateClasseMiddleware {
+export class UpdateClassMiddleware {
     public register(router: Router, method: method, path: string): void {
         const { authenticate } = new AuthUserMiddleware();
-        const { handle } = new CreateClasseController();
+        const { handle } = new UpdateClassController();
 
         router[method](path, authenticate, handle);
     }

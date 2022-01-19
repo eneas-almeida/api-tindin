@@ -1,4 +1,4 @@
-export interface Classe {
+export interface Class {
     _id: any;
     name: string;
     description: string;

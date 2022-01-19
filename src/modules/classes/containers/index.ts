@@ -1,6 +1,6 @@
 import { container } from 'tsyringe';
 
-import { ClasseRepository } from '@modules/classes/repositories/ClasseRepository';
-import { ClasseMongoRepository } from '../infra/typeorm/mongo/repositories/ClasseMongoRepository';
+import { ClassRepository } from '@modules/classes/repositories/ClassRepository';
+import { ClassMongoRepository } from '../infra/typeorm/mongo/repositories/ClassMongoRepository';
 
-container.registerSingleton<ClasseRepository>('ClasseRepository', ClasseMongoRepository);
+container.registerSingleton<ClassRepository>('ClassRepository', ClassMongoRepository);

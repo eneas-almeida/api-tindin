@@ -8,13 +8,13 @@ import { inject, injectable } from 'tsyringe';
 export class CreateCommentService {
     constructor(
         @inject('CommentRepository') private commentRepository: CommentRepository,
-        @inject('ClasseRepository') private classeRepository: CommentRepository
+        @inject('classRepository') private classRepository: CommentRepository
     ) {}
 
     async execute(createCommentDTO: CreateCommentDTO): Promise<ResponseCommentDTO> {
         const { id_class } = createCommentDTO;
 
-        const existsClasseSchema = await this.classeRepository.findOneById(id_class);
+        const existsClasseSchema = await this.classRepository.findOneById(id_class);
 
         if (!existsClasseSchema) {
             throw new AppException(`Classe id ${id_class} not found!`, 404);

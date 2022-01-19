@@ -1,14 +1,12 @@
 import { container } from 'tsyringe';
 import { Request, Response } from 'express';
-import { UpdateClasseService } from './UpdateClasseService';
+import { CreateClassService } from './CreateClassService';
 
-export class UpdateClasseController {
+export class CreateClassController {
     public async handle(req: Request, res: Response): Promise<Response> {
-        const classeId = req.params.id;
-
         const { name, description, date_init, date_end } = req.body;
 
-        const updateClasseService = container.resolve(UpdateClasseService);
+        const createClassService = container.resolve(CreateClassService);
 
         const data = {
             name,
@@ -17,8 +15,8 @@ export class UpdateClasseController {
             date_end,
         };
 
-        const result = await updateClasseService.execute(data, classeId);
+        const result = await createClassService.execute(data);
 
-        return res.status(200).json(result);
+        return res.status(201).json(result);
     }
 }

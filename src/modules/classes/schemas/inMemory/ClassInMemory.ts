@@ -1,6 +1,6 @@
-import { Classe } from '../Classe';
+import { Class } from '../Class';
 
-export class ClasseInMemory implements Classe {
+export class ClassInMemory implements Class {
     _id: any;
     name: string;
     description: string;

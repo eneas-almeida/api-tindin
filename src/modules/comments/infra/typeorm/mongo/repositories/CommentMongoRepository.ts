@@ -16,6 +16,16 @@ export class CommentMongoRepository implements CommentRepository {
         return await this.repository.findOne({ _id: new ObjectID(id) });
     }
 
+    async findSomeByClassIdAndLimit(id_class: string, limit: number): Promise<Comment[]> {
+        return await this.repository.find({
+            where: {
+                id_class,
+            },
+            order: { date_created: 'DESC' },
+            take: limit,
+        });
+    }
+
     async create(createCommentDTO: CreateCommentDTO): Promise<Comment> {
         const schemaCreated = this.repository.create(createCommentDTO);
 

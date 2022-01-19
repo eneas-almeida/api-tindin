@@ -1,4 +1,4 @@
-export interface UpdateClasseDTO {
+export interface UpdateClassDTO {
     name: string;
     description: string;
     date_init: Date;

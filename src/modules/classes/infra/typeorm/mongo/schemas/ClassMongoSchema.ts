@@ -1,8 +1,8 @@
-import { Classe } from '@modules/classes/schemas/Classe';
+import { Class } from '@modules/classes/schemas/Class';
 import { Column, CreateDateColumn, Entity, ObjectID, ObjectIdColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity('classe')
-export class ClasseMongoSchema implements Classe {
+export class ClassMongoSchema implements Class {
     @ObjectIdColumn()
     _id: ObjectID;
 
