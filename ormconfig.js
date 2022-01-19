@@ -2,7 +2,7 @@ require('dotenv/config');
 
 const environment = process.env.NODE_ENV;
 
-const patch = environment === 'development' ? '.' : '/app';
+const patch = environment === 'development' ? '.' : '.';
 const folder = environment === 'development' ? 'src' : 'dist';
 const file = environment === 'development' ? 'ts' : 'js';
 
