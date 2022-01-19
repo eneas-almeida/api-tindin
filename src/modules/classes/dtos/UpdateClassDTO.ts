@@ -1,7 +1,3 @@
-export interface UpdateClassDTO {
-    name: string;
-    description: string;
-    date_init: Date;
-    date_end: Date;
-    total_comments?: number;
-}
+import { CreateClassDTO } from './CreateClassDTO';
+
+export class UpdateClassDTO extends CreateClassDTO {}
