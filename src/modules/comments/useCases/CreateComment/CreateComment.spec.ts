@@ -3,22 +3,22 @@ import { ClassRepositoryInMemory } from '@modules/classes/repositories/inMemory/
 import { CommentRepository } from '@modules/comments/repositories/CommentRepository';
 import { CommentRepositoryInMemory } from '@modules/comments/repositories/inMemory/CommentRepositoryInMemory';
 import { AppException } from '@shared/exceptions/AppException';
-import { ShowClassService } from './ShowClasseService';
+import { CreateCommentService } from './CreateCommentService';
 
-let classRepository: ClassRepository;
 let commentRepository: CommentRepository;
-let showClassService: ShowClassService;
+let classRepository: ClassRepository;
+let createCommentService: CreateCommentService;
 
-describe('ShowClassService', () => {
+describe('CreateCommentService', () => {
     beforeEach(() => {
-        classRepository = new ClassRepositoryInMemory();
         commentRepository = new CommentRepositoryInMemory();
-        showClassService = new ShowClassService(classRepository, commentRepository);
+        classRepository = new ClassRepositoryInMemory();
+        createCommentService = new CreateCommentService(commentRepository, classRepository);
     });
 
     // TEST 1
 
-    it('should be show a class', async () => {
+    it('should be create a new comment', async () => {
         const classCreated = await classRepository.create({
             name: 'Quimica',
             description: 'aula de quimmica',
@@ -27,22 +27,24 @@ describe('ShowClassService', () => {
             date_end: new Date('12-24-2001'),
         });
 
-        await commentRepository.create({
+        const commentCreated = await createCommentService.execute({
             id_class: classCreated._id,
-            comment: 'comment 1',
+            comment: 'comment 1 aula de quimica',
         });
 
-        await commentRepository.create({
-            id_class: classCreated._id,
-            comment: 'comment 2',
-        });
-
-        await showClassService.execute(classCreated._id);
+        expect(commentCreated.result).toHaveProperty('_id');
     });
 
-    // Teste 2
+    // TEST 2
 
-    it('should be not show a class', async () => {
-        await expect(showClassService.execute('61e7b0d3df858ff94da412ca')).rejects.toBeInstanceOf(AppException);
+    it('should be not create a new comment', async () => {
+        const idToConflict = '61e7952ab7b18add1344cde7';
+
+        await expect(
+            createCommentService.execute({
+                id_class: idToConflict,
+                comment: 'comment 1 aula de quimica',
+            })
+        ).rejects.toBeInstanceOf(AppException);
     });
 });

@@ -2,23 +2,22 @@ import { ClassRepository } from '@modules/classes/repositories/ClassRepository';
 import { ClassRepositoryInMemory } from '@modules/classes/repositories/inMemory/ClassRepositoryInMemory';
 import { CommentRepository } from '@modules/comments/repositories/CommentRepository';
 import { CommentRepositoryInMemory } from '@modules/comments/repositories/inMemory/CommentRepositoryInMemory';
-import { AppException } from '@shared/exceptions/AppException';
-import { ShowClassService } from './ShowClasseService';
+import { ListCommentsService } from './ListCommentsService';
 
-let classRepository: ClassRepository;
 let commentRepository: CommentRepository;
-let showClassService: ShowClassService;
+let classRepository: ClassRepository;
+let listCommentsService: ListCommentsService;
 
-describe('ShowClassService', () => {
+describe('ListCommentsService', () => {
     beforeEach(() => {
-        classRepository = new ClassRepositoryInMemory();
         commentRepository = new CommentRepositoryInMemory();
-        showClassService = new ShowClassService(classRepository, commentRepository);
+        classRepository = new ClassRepositoryInMemory();
+        listCommentsService = new ListCommentsService(commentRepository);
     });
 
     // TEST 1
 
-    it('should be show a class', async () => {
+    it('should be list a comments', async () => {
         const classCreated = await classRepository.create({
             name: 'Quimica',
             description: 'aula de quimmica',
@@ -37,12 +36,6 @@ describe('ShowClassService', () => {
             comment: 'comment 2',
         });
 
-        await showClassService.execute(classCreated._id);
-    });
-
-    // Teste 2
-
-    it('should be not show a class', async () => {
-        await expect(showClassService.execute('61e7b0d3df858ff94da412ca')).rejects.toBeInstanceOf(AppException);
+        await listCommentsService.execute();
     });
 });

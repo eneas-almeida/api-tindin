@@ -12,53 +12,61 @@ export class ClassRepositoryInMemory implements ClassRepository {
         this.repository = [];
     }
 
-    async updateValueTotalComment(class_: Class, value: number): Promise<void> {
-        throw new Error('Method not implemented.');
-    }
-
     async findOneById(id: string): Promise<Class | undefined> {
-        return this.repository.find((classe) => classe._id === id);
+        return this.repository.find((class_) => class_._id === id);
     }
 
     async findOneByName(name: string): Promise<Class | undefined> {
-        return this.repository.find((classe) => classe.name === name);
+        return this.repository.find((class_) => class_.name === name);
     }
 
     async create(createClassDTO: CreateClassDTO): Promise<Class> {
-        const classe = new ClassInMemory();
+        const class_ = new ClassInMemory();
 
-        classe._id = uuid();
+        class_._id = uuid();
 
-        Object.assign(classe, createClassDTO);
+        Object.assign(class_, createClassDTO);
 
-        this.repository.push(classe);
+        this.repository.push(class_);
 
-        return classe;
+        return class_;
     }
 
-    async save(classe: Class): Promise<Class> {
-        const index = this.repository.indexOf(classe);
+    async updateValueTotalComment(class_: Class, value: number): Promise<void> {
+        const index = this.repository.indexOf(class_);
 
         if (index !== -1) {
-            classe.date_updated = new Date();
+            const count = class_.total_comments;
 
-            this.repository[index] = classe;
+            Object.assign(class_, { total_comments: count + value });
+
+            this.repository[index] = class_;
+        }
+    }
+
+    async save(class_: Class): Promise<Class> {
+        const index = this.repository.indexOf(class_);
+
+        if (index !== -1) {
+            class_.date_updated = new Date();
+
+            this.repository[index] = class_;
         }
 
-        return classe;
+        return class_;
     }
 
     async list(): Promise<Class[]> {
         return this.repository;
     }
 
-    async delete(classe: Class): Promise<Class> {
-        const index = this.repository.indexOf(classe);
+    async delete(class_: Class): Promise<Class> {
+        const index = this.repository.indexOf(class_);
 
         if (index !== -1) {
             this.repository.splice(index, 1);
         }
 
-        return classe;
+        return class_;
     }
 }

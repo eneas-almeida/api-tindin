@@ -3,22 +3,22 @@ import { ClassRepositoryInMemory } from '@modules/classes/repositories/inMemory/
 import { CommentRepository } from '@modules/comments/repositories/CommentRepository';
 import { CommentRepositoryInMemory } from '@modules/comments/repositories/inMemory/CommentRepositoryInMemory';
 import { AppException } from '@shared/exceptions/AppException';
-import { ShowClassService } from './ShowClasseService';
+import { ShowCommentService } from './ShowCommentService';
 
 let classRepository: ClassRepository;
 let commentRepository: CommentRepository;
-let showClassService: ShowClassService;
+let showCommentService: ShowCommentService;
 
-describe('ShowClassService', () => {
+describe('ShowCommentService', () => {
     beforeEach(() => {
         classRepository = new ClassRepositoryInMemory();
         commentRepository = new CommentRepositoryInMemory();
-        showClassService = new ShowClassService(classRepository, commentRepository);
+        showCommentService = new ShowCommentService(commentRepository);
     });
 
     // TEST 1
 
-    it('should be show a class', async () => {
+    it('should be show a comment', async () => {
         const classCreated = await classRepository.create({
             name: 'Quimica',
             description: 'aula de quimmica',
@@ -27,22 +27,17 @@ describe('ShowClassService', () => {
             date_end: new Date('12-24-2001'),
         });
 
-        await commentRepository.create({
+        const comment = await commentRepository.create({
             id_class: classCreated._id,
             comment: 'comment 1',
         });
 
-        await commentRepository.create({
-            id_class: classCreated._id,
-            comment: 'comment 2',
-        });
-
-        await showClassService.execute(classCreated._id);
+        await showCommentService.execute(comment._id);
     });
 
     // Teste 2
 
-    it('should be not show a class', async () => {
-        await expect(showClassService.execute('61e7b0d3df858ff94da412ca')).rejects.toBeInstanceOf(AppException);
+    it('should be not show a comment', async () => {
+        await expect(showCommentService.execute('61e7b0d3df858ff94da412ca')).rejects.toBeInstanceOf(AppException);
     });
 });

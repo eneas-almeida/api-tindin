@@ -29,8 +29,10 @@ describe('CreateClassService', () => {
     // TEST 2
 
     it('should be not create a new class', async () => {
+        const nameToConflict = 'Quimica';
+
         await classRepository.create({
-            name: 'Quimica',
+            name: nameToConflict,
             description: 'aula de quimmica',
             video: 'http://www.video.com',
             date_init: new Date('12-23-2001'),
@@ -39,7 +41,7 @@ describe('CreateClassService', () => {
 
         await expect(
             createClassService.execute({
-                name: 'Quimica',
+                name: nameToConflict,
                 description: 'aula de quimmica',
                 video: 'http://www.video.com',
                 date_init: new Date('12-23-2001'),

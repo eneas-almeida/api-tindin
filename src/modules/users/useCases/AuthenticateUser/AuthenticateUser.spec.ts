@@ -63,7 +63,7 @@ describe('AuthenticateUserService', () => {
         await expect(
             authenticateUserService.execute({
                 email: 'tiago@gmail.com',
-                password: 'penadepatoxxxxxxxx',
+                password: 'passwordincorrect',
             })
         ).rejects.toBeInstanceOf(AppException);
     });

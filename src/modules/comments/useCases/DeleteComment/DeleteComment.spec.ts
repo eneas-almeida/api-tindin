@@ -3,22 +3,22 @@ import { ClassRepositoryInMemory } from '@modules/classes/repositories/inMemory/
 import { CommentRepository } from '@modules/comments/repositories/CommentRepository';
 import { CommentRepositoryInMemory } from '@modules/comments/repositories/inMemory/CommentRepositoryInMemory';
 import { AppException } from '@shared/exceptions/AppException';
-import { ShowClassService } from './ShowClasseService';
+import { DeleteCommentService } from './DeleteCommentService';
 
 let classRepository: ClassRepository;
 let commentRepository: CommentRepository;
-let showClassService: ShowClassService;
+let deleteCommentService: DeleteCommentService;
 
-describe('ShowClassService', () => {
+describe('DeleteCommentService', () => {
     beforeEach(() => {
         classRepository = new ClassRepositoryInMemory();
         commentRepository = new CommentRepositoryInMemory();
-        showClassService = new ShowClassService(classRepository, commentRepository);
+        deleteCommentService = new DeleteCommentService(commentRepository, classRepository);
     });
 
     // TEST 1
 
-    it('should be show a class', async () => {
+    it('should be delete a comment', async () => {
         const classCreated = await classRepository.create({
             name: 'Quimica',
             description: 'aula de quimmica',
@@ -27,22 +27,21 @@ describe('ShowClassService', () => {
             date_end: new Date('12-24-2001'),
         });
 
-        await commentRepository.create({
+        const comment = await commentRepository.create({
             id_class: classCreated._id,
             comment: 'comment 1',
         });
 
-        await commentRepository.create({
-            id_class: classCreated._id,
-            comment: 'comment 2',
-        });
+        const commentDeleted = await deleteCommentService.execute(comment._id);
 
-        await showClassService.execute(classCreated._id);
+        expect(commentDeleted.result).toHaveProperty('_id');
     });
 
-    // Teste 2
+    // TEST 2
 
-    it('should be not show a class', async () => {
-        await expect(showClassService.execute('61e7b0d3df858ff94da412ca')).rejects.toBeInstanceOf(AppException);
+    it('should be not delete a comment', async () => {
+        const idCommentToConflict = '61e7952ab7b18add1344cde7';
+
+        await expect(deleteCommentService.execute(idCommentToConflict)).rejects.toBeInstanceOf(AppException);
     });
 });
