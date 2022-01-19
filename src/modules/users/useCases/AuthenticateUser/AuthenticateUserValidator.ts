@@ -1,17 +1,20 @@
+import { AuthenticateUserDTO } from '@modules/users/dtos/AuthenticateUserDTO';
 import { AppException } from '@shared/exceptions/AppException';
-import { isEmailValid } from '@shared/helpers/validator';
 import { NextFunction, Request, Response } from 'express';
+import { validate } from 'class-validator';
 
 export class AuthenticateUserValidator {
-    public validate(req: Request, _: Response, next: NextFunction): any {
+    async validate(req: Request, _: Response, next: NextFunction) {
         const { email, password } = req.body;
 
-        if (!isEmailValid(email)) {
-            throw new AppException('Email invalid!', 403);
-        }
+        const authenticateUserDTO = AuthenticateUserDTO.create(email, password);
 
-        if (!password) {
-            throw new AppException('Password invalid!', 403);
+        const existsErrors = await validate(authenticateUserDTO);
+
+        if (existsErrors.length) {
+            const fields = existsErrors.map((e) => e.property).join(', ');
+
+            throw new AppException(`Fields: ${fields}`, 400);
         }
 
         return next();
