@@ -151,11 +151,12 @@ Graduando em Engenharia de Computação pelo Instituto Federal da Paraíba (2017
 
 ## Sugestões futuras
 
--   Utilizar o Swagger para documentar a API
--   Utilização de cache com Redis, utilizando o padrão proxy para login do usuário
--   Utilizar cache na parte de listagem de aulas e comentários
--   Utilizar filas com o bull para resolver a remoção em cascata dos documentos relacionados
--   Utilizar o rate limit para mitigar a idempotência dos métodos posts
+-   Utilizar o Swagger para documentar a API.
+-   Utilização de cache com Redis, utilizando o padrão proxy para login do usuário.
+-   Utilizar cache na parte de listagem de aulas e comentários.
+-   Utilizar filas com o bull para resolver a remoção em cascata dos documentos relacionados.
+-   Utilizar o rate limit para mitigar a idempotência dos métodos posts.
+-   Por motivo de tempo não foi implementado o upload, entretanto, este será implementado nos dias seguintes.
 
 ## Vantagens da arquitetura Feat By Packages
 
@@ -169,6 +170,12 @@ Graduando em Engenharia de Computação pelo Instituto Federal da Paraíba (2017
 
 O projeto tem como gerencimento de pacotes o **Yarn** e o **Makefile** como automação de comandos, além disso, o MongoDB é um container do **Docker**.
 
+## Padrão de projeto: Middleware
+
+👉 Na linha 12, é possível observar o funcionamento do padrão de projeto, onde os contextos podem ser observados em: path (nó inicial), authenticate, validade e handle (nó folha).
+
+<img src="./media/images/middleware.png" />
+
 ## Gitflow
 
 <img src="./media/images/gitflow-v1.png" />
@@ -180,6 +187,10 @@ O projeto tem como gerencimento de pacotes o **Yarn** e o **Makefile** como auto
 <img src="./media/images/delete-comment-coverage.png" />
 
 <img src="./media/images/alias-tests.png" />
+
+## Deploy do projeto
+
+O serviço de cloud utilizado será o DigitalOcean. Por motivo de tempo, não foi implementado um CI/CD, entretanto, este ainda será implementado nos dias seguintes, nos serviços da CodeShip.
 
 ## Como executar o projeto
 
