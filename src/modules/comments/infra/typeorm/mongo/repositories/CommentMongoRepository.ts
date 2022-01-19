@@ -12,14 +12,6 @@ export class CommentMongoRepository implements CommentRepository {
         this.repository = getMongoRepository(CommentMongoSchema, 'mongodb');
     }
 
-    async countById(id_class: string): Promise<number> {
-        return this.repository.count({
-            where: {
-                id_class,
-            },
-        });
-    }
-
     async findOneById(id: string): Promise<Comment | undefined> {
         return await this.repository.findOne({ _id: new ObjectID(id) });
     }
