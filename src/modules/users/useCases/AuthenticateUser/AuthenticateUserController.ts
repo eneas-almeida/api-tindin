@@ -1,6 +1,7 @@
 import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 import { AuthenticateUserService } from './AuthenticateUserService';
+import { StatusCode } from '@shared/helpers/StatusCode';
 
 export class AuthenticateUserController {
     public async handle(req: Request, res: Response): Promise<Response> {
@@ -15,6 +16,6 @@ export class AuthenticateUserController {
 
         const token = await authenticateUserService.execute(data);
 
-        return res.status(200).json(token);
+        return res.status(StatusCode.OK).json(token);
     }
 }

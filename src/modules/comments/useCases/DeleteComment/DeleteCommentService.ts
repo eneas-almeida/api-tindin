@@ -2,6 +2,7 @@ import { ClassRepository } from '@modules/classes/repositories/ClassRepository';
 import { ResponseCommentDTO } from '@modules/comments/dtos/ReponseCommentDTO';
 import { CommentRepository } from '@modules/comments/repositories/CommentRepository';
 import { AppException } from '@shared/exceptions/AppException';
+import { StatusCode } from '@shared/helpers/StatusCode';
 import { inject, injectable } from 'tsyringe';
 
 @injectable()
@@ -15,7 +16,7 @@ export class DeleteCommentService {
         const existsCommentSchema = await this.commentRepository.findOneById(id);
 
         if (!existsCommentSchema) {
-            throw new AppException(`Comment id ${id} not found!`, 404);
+            throw new AppException(`Comment id ${id} not found!`, StatusCode.NOT_FOUND);
         }
 
         const { id_class } = existsCommentSchema;
@@ -23,7 +24,7 @@ export class DeleteCommentService {
         const existsClassSchema = await this.classRepository.findOneById(id_class);
 
         if (!existsClassSchema) {
-            throw new AppException(`Class id ${id_class} not found!`, 404);
+            throw new AppException(`Class id ${id_class} not found!`, StatusCode.NOT_FOUND);
         }
 
         await this.commentRepository.delete(existsCommentSchema);

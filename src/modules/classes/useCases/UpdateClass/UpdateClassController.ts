@@ -1,6 +1,7 @@
 import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 import { UpdateClassService } from './UpdateClassService';
+import { StatusCode } from '@shared/helpers/StatusCode';
 
 export class UpdateClassController {
     public async handle(req: Request, res: Response): Promise<Response> {
@@ -20,6 +21,6 @@ export class UpdateClassController {
 
         const result = await updateClassService.execute(data, classeId);
 
-        return res.status(200).json(result);
+        return res.status(StatusCode.OK).json(result);
     }
 }

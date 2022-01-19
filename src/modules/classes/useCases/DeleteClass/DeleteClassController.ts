@@ -1,6 +1,7 @@
 import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 import { DeleteClassService } from './DeleteClasseService';
+import { StatusCode } from '@shared/helpers/StatusCode';
 
 export class DeleteClassController {
     public async handle(req: Request, res: Response): Promise<Response> {
@@ -10,6 +11,6 @@ export class DeleteClassController {
 
         const result = await deleteClassService.execute(classId);
 
-        return res.status(200).json(result);
+        return res.status(StatusCode.OK).json(result);
     }
 }

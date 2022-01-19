@@ -2,6 +2,7 @@ import { CreateClassDTO } from '@modules/classes/dtos/CreateClassDTO';
 import { ResponseClassDTO } from '@modules/classes/dtos/ReponseClassDTO';
 import { ClassRepository } from '@modules/classes/repositories/ClassRepository';
 import { AppException } from '@shared/exceptions/AppException';
+import { StatusCode } from '@shared/helpers/StatusCode';
 import { inject, injectable } from 'tsyringe';
 
 @injectable()
@@ -14,7 +15,7 @@ export class CreateClassService {
         const existsSchema = await this.classRepository.findOneByName(name);
 
         if (existsSchema) {
-            throw new AppException(`Class name ${name} already exists!`, 400);
+            throw new AppException(`Class name ${name} already exists!`, StatusCode.CONFLICT);
         }
 
         createClassDTO.date_init = new Date(createClassDTO.date_init);

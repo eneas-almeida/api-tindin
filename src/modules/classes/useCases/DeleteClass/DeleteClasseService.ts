@@ -2,6 +2,7 @@ import { ResponseClassDTO } from '@modules/classes/dtos/ReponseClassDTO';
 import { ClassRepository } from '@modules/classes/repositories/ClassRepository';
 import { CommentRepository } from '@modules/comments/repositories/CommentRepository';
 import { AppException } from '@shared/exceptions/AppException';
+import { StatusCode } from '@shared/helpers/StatusCode';
 import { inject, injectable } from 'tsyringe';
 
 @injectable()
@@ -15,7 +16,7 @@ export class DeleteClassService {
         const existsSchema = await this.classRepository.findOneById(id);
 
         if (!existsSchema) {
-            throw new AppException(`Class id ${id} not found!`, 404);
+            throw new AppException(`Class id ${id} not found!`, StatusCode.NOT_FOUND);
         }
 
         const comments = await this.commentRepository.findSomeByClassId(String(existsSchema._id));

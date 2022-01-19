@@ -1,6 +1,7 @@
 import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 import { ListCommentsService } from './ListCommentsService';
+import { StatusCode } from '@shared/helpers/StatusCode';
 
 export class ListCommentsController {
     public async handle(_: Request, res: Response): Promise<Response> {
@@ -8,6 +9,6 @@ export class ListCommentsController {
 
         const result = await listCommentsService.execute();
 
-        return res.status(200).json(result);
+        return res.status(StatusCode.OK).json(result);
     }
 }

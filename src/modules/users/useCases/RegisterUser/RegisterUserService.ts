@@ -4,6 +4,7 @@ import { HashProvider } from '@modules/users/providers/HashProvider/models/HashP
 import { TokenProvider } from '@modules/users/providers/TokenProvider/models/TokenProvider';
 import { UserRepository } from '@modules/users/repositories/UserRepository';
 import { AppException } from '@shared/exceptions/AppException';
+import { StatusCode } from '@shared/helpers/StatusCode';
 import { injectable, inject } from 'tsyringe';
 
 @injectable()
@@ -20,7 +21,7 @@ export class RegisterUserService {
         const existsSchema = await this.userRepository.findOneByEmail(email);
 
         if (existsSchema) {
-            throw new AppException(`User email ${email} already exists!`, 400);
+            throw new AppException(`User email ${email} already exists!`, StatusCode.CONFLICT);
         }
 
         const hashPassword = await this.hashProvider.gererateHash(password);

@@ -5,6 +5,7 @@ import { HashProvider } from '@modules/users/providers/HashProvider/models/HashP
 import { TokenProvider } from '@modules/users/providers/TokenProvider/models/TokenProvider';
 import { UserRepository } from '@modules/users/repositories/UserRepository';
 import { AppException } from '@shared/exceptions/AppException';
+import { StatusCode } from '@shared/helpers/StatusCode';
 
 @injectable()
 export class AuthenticateUserService {
@@ -18,7 +19,7 @@ export class AuthenticateUserService {
         const existsSchema = await this.userRepository.findOneByEmail(authenticateUserDTO.email);
 
         if (!existsSchema) {
-            throw new AppException('Email or password invalid!', 403);
+            throw new AppException('Email or password invalid!', StatusCode.FORBIDDEN);
         }
 
         const { _id, email, password } = existsSchema;
@@ -26,7 +27,7 @@ export class AuthenticateUserService {
         const checkPassword = await this.hashProvider.compareHash(authenticateUserDTO.password, password);
 
         if (!checkPassword) {
-            throw new AppException('Email or password invalid!', 403);
+            throw new AppException('Email or password invalid!', StatusCode.FORBIDDEN);
         }
 
         const payload = {
