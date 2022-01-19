@@ -9,5 +9,5 @@ yarn add @types/bcryptjs @types/cors @types/dotenv @types/express @types/helmet 
 ```
 
 ```bash
-yarn add @sentry/node bcryptjs class-transformer cors dotenv express express-async-errors helmet jsonwebtoken mongodb morgan multer reflect-metadata tsyringe typeorm uuid youch
+yarn add @sentry/node bcryptjs class-transformer cors dotenv express express-async-errors helmet jsonwebtoken mongodb morgan multer reflect-metadata tsyringe typeorm uuid youch pm2 esm
 ```

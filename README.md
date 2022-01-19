@@ -1,10 +1,10 @@
-# TINDIN
+# Api Backend Tindin
 
 <img src="./media/images/logo-tindin.webp" />
 
 ## Teste Desenvolvedor: Backend
 
-> API em NodeJS, utilizando banco de dados MongoDB (TypeORM), com cobertura de testes (coverages), utilizando o Jest.<br /> <a href="http://143.198.112.106:3010">👉 app url</a>
+> API em NodeJS, utilizando banco de dados MongoDB (TypeORM), com cobertura de testes (coverages), utilizando o Jest.<br /> 👉 <a href="http://143.198.112.106:3011/classes"> app url</a>
 
 ## Sobre o candidato do teste de back-end
 
@@ -23,7 +23,7 @@ Graduando em Engenharia de Computação pelo Instituto Federal da Paraíba (2017
 ### Login do user
 
 ```json
-// http://143.198.112.106:3010/users/login (POST)
+// http://143.198.112.106:3011/users/login (POST)
 {
     "email": "admin@admin.com",
     "password": "G1rafarosa#"
@@ -33,7 +33,7 @@ Graduando em Engenharia de Computação pelo Instituto Federal da Paraíba (2017
 ### Registro de user
 
 ```json
-// http://143.198.112.106:3010/users (POST)
+// http://143.198.112.106:3011/users (POST)
 {
     "name": "Tiago Rizzo",
     "email": "tiago@gmail.com",
@@ -44,7 +44,7 @@ Graduando em Engenharia de Computação pelo Instituto Federal da Paraíba (2017
 ### Cria a aula
 
 ```json
-// http://143.198.112.106:3010/classes (POST)
+// http://143.198.112.106:3011/classes (POST)
 {
     "name": "Inglês",
     "description": "Aula de inglês ao vivo",
@@ -57,7 +57,7 @@ Graduando em Engenharia de Computação pelo Instituto Federal da Paraíba (2017
 ### Atualiza a aula
 
 ```json
-// http://143.198.112.106:3010/classes/{id} (PUT)
+// http://143.198.112.106:3011/classes/{id} (PUT)
 {
     "name": "Portugês",
     "description": "Aula de portugês ao vivo",
@@ -70,28 +70,28 @@ Graduando em Engenharia de Computação pelo Instituto Federal da Paraíba (2017
 ### Lista as aulas
 
 ```json
-// http://143.198.112.106:3010/classes (GET)
+// http://143.198.112.106:3011/classes (GET)
 {}
 ```
 
 ### Mostra detalhes de uma aula
 
 ```json
-// http://143.198.112.106:3010/classes/{id} (GET)
+// http://143.198.112.106:3011/classes/{id} (GET)
 {}
 ```
 
 ### Deleta uma aula
 
 ```json
-// http://143.198.112.106:3010/classes/{id} (DELETE)
+// http://143.198.112.106:3011/classes/{id} (DELETE)
 {}
 ```
 
 ### Cria comentário
 
 ```json
-// http://143.198.112.106:3010/classes/comments (POST)
+// http://143.198.112.106:3011/classes/comments (POST)
 {
     "id_class": "61e7952ab7b18add1344cde7",
     "comment": "Comentário sobre a aula de português..."
@@ -101,21 +101,21 @@ Graduando em Engenharia de Computação pelo Instituto Federal da Paraíba (2017
 ### Lista comentários
 
 ```json
-// http://143.198.112.106:3010/comments (GET)
+// http://143.198.112.106:3011/comments (GET)
 {}
 ```
 
 ### Mostra detalhes de um comentário
 
 ```json
-// http://143.198.112.106:3010/classes/comments/{id} (GET)
+// http://143.198.112.106:3011/classes/comments/{id} (GET)
 {}
 ```
 
 ### Deleta um comentário
 
 ```json
-// http://143.198.112.106:3010/classes/comments/{id} (DELETE)
+// http://143.198.112.106:3011/classes/comments/{id} (DELETE)
 {}
 ```
 
@@ -192,7 +192,7 @@ O projeto tem como gerencimento de pacotes o **Yarn** e o **Makefile** como auto
 
 O serviço de cloud utilizado será o DigitalOcean. Por motivo de tempo, não foi implementado um CI/CD, entretanto, este ainda será implementado nos dias seguintes, nos serviços da CodeShip.
 
-## Como executar o projeto
+## Instruções para rodar a API
 
 ### Pré-requisitos
 
@@ -202,12 +202,24 @@ O serviço de cloud utilizado será o DigitalOcean. Por motivo de tempo, não fo
 -   Docker compose v1.29.2, build 5becea4c
 -   Makefile para rodar os aliases
 
+### passo a passo
+
 ```bash
 # Para clonar repositório
 git clone https://gitlab.com/venzel/tindin.git
 
 # Para entrar na pasta do projeto
 cd tindin
+
+# Renomear arquivo .env.example para .env
+cp -r .env.example .env
+
+# Inserir as variáveis de ambiente no arquivo .env
+# Para gerar a o SENTRY_DSN: https://sentry.io/
+# Para gerar os TOKEN_SECRET e TOKEN_SECRET_REFRESH http://www.md5.cz/
+SENTRY_DSN=
+TOKEN_SECRET=
+TOKEN_SECRET_REFRESH=
 
 # Para instalar os pacotes
 make install
@@ -218,7 +230,7 @@ make test
 # Para subir o container do mongodb na porta 27017
 make up
 
-# Para rodar as seeds do projeto (user admin)
+# Para rodar as seeds do projeto (email: admin@admin.com, senha: G1rafarosa#)
 make seed
 
 # Para executar o projeto na porta 3010
