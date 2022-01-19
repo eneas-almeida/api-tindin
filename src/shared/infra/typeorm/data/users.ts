@@ -2,6 +2,6 @@ export const users = [
     {
         name: 'Admin',
         email: 'admin@admin.com',
-        password: 'girafarosa',
+        password: 'G1rafarosa#',
     },
 ];

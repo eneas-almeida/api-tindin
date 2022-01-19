@@ -1,19 +1,29 @@
 include .env
 
+.PHONY: install
+
+install:
+	yarn install
+
 .PHONY: dev
 
 dev:
 	yarn dev
 
-.PHONY: mig
+.PHONY: seed
 
-mig:
-	yarn mig
+seed:
+	yarn seed
 
-.PHONY: migration
+.PHONY: build
 
-migration:
-	yarn typeorm migration:run
+build:
+	yarn build
+
+.PHONY: test
+
+test:
+	yarn test
 
 .PHONY: up
 
