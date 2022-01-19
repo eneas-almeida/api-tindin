@@ -24,7 +24,6 @@ describe('RegisterUserService', () => {
 
     it('should be register a new user', async () => {
         const generateHash = jest.spyOn(hashProvider, 'gererateHash');
-
         const generateToken = jest.spyOn(tokenProvider, 'generateToken');
 
         const user = await registerUserService.execute({
