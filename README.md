@@ -2,28 +2,17 @@
 
 <img src="./media/images/logo-tindin.webp" />
 
-## Teste Desenvolvedor: Backend
+## Sobre
 
 > API em NodeJS, utilizando banco de dados MongoDB (TypeORM), com cobertura de testes (coverages), utilizando o Jest.<br /> 👉 <a href="http://143.198.112.106:3011/classes"> app url</a>
-
-## Sobre o candidato do teste de back-end
-
-**Edivam Enéas de Almeida Júnior**
-
-Graduando em Engenharia de Computação pelo Instituto Federal da Paraíba (2017 - 2022). Pré concluinte.
-
-**Telefone:** (83) 981300768<br />
-**Email:** eneas.eng@yahoo.com
-
-👉 <a href="https://www.linkedin.com/in/venzel">Linkedin</a><br />
-👉 <a href="https://www.github.com/venzel">Github</a><br />
 
 ## Paths
 
 ### Login do user
 
+👉 http://143.198.112.106:3011/users/login (POST)
+
 ```json
-// http://143.198.112.106:3011/users/login (POST)
 {
     "email": "admin@admin.com",
     "password": "G1rafarosa#"
@@ -32,8 +21,9 @@ Graduando em Engenharia de Computação pelo Instituto Federal da Paraíba (2017
 
 ### Registro de user
 
+👉 http://143.198.112.106:3011/users (POST)
+
 ```json
-// http://143.198.112.106:3011/users (POST)
 {
     "name": "Tiago Rizzo",
     "email": "tiago@gmail.com",
@@ -43,8 +33,9 @@ Graduando em Engenharia de Computação pelo Instituto Federal da Paraíba (2017
 
 ### Cria a aula
 
+👉 http://143.198.112.106:3011/classes (POST)
+
 ```json
-// http://143.198.112.106:3011/classes (POST)
 {
     "name": "Inglês",
     "description": "Aula de inglês ao vivo",
@@ -56,8 +47,9 @@ Graduando em Engenharia de Computação pelo Instituto Federal da Paraíba (2017
 
 ### Atualiza a aula
 
+👉 http://143.198.112.106:3011/classes/{id} (PUT)
+
 ```json
-// http://143.198.112.106:3011/classes/{id} (PUT)
 {
     "name": "Portugês",
     "description": "Aula de portugês ao vivo",
@@ -69,29 +61,33 @@ Graduando em Engenharia de Computação pelo Instituto Federal da Paraíba (2017
 
 ### Lista as aulas
 
+👉 http://143.198.112.106:3011/classes (GET)
+
 ```json
-// http://143.198.112.106:3011/classes (GET)
 {}
 ```
 
 ### Mostra detalhes de uma aula
 
+👉 http://143.198.112.106:3011/classes/{id} (GET)
+
 ```json
-// http://143.198.112.106:3011/classes/{id} (GET)
 {}
 ```
 
 ### Deleta uma aula
 
+👉 http://143.198.112.106:3011/classes/{id} (DELETE)
+
 ```json
-// http://143.198.112.106:3011/classes/{id} (DELETE)
 {}
 ```
 
 ### Cria comentário
 
+👉 http://143.198.112.106:3011/classes/comments (POST)
+
 ```json
-// http://143.198.112.106:3011/classes/comments (POST)
 {
     "id_class": "61e7952ab7b18add1344cde7",
     "comment": "Comentário sobre a aula de português..."
@@ -100,22 +96,26 @@ Graduando em Engenharia de Computação pelo Instituto Federal da Paraíba (2017
 
 ### Lista comentários
 
+👉 http://143.198.112.106:3011/comments (GET)
+s
+
 ```json
-// http://143.198.112.106:3011/comments (GET)
 {}
 ```
 
 ### Mostra detalhes de um comentário
 
+👉 http://143.198.112.106:3011/classes/comments/{id} (GET)
+
 ```json
-// http://143.198.112.106:3011/classes/comments/{id} (GET)
 {}
 ```
 
 ### Deleta um comentário
 
+👉 http://143.198.112.106:3011/classes/comments/{id} (DELETE)
+
 ```json
-// http://143.198.112.106:3011/classes/comments/{id} (DELETE)
 {}
 ```
 
@@ -156,7 +156,6 @@ Graduando em Engenharia de Computação pelo Instituto Federal da Paraíba (2017
 -   Utilizar cache na parte de listagem de aulas e comentários.
 -   Utilizar filas com o bull para resolver a remoção em cascata dos documentos relacionados.
 -   Utilizar o rate limit para mitigar a idempotência dos métodos posts.
--   Por motivo de tempo não foi implementado o upload, entretanto, este será implementado nos dias seguintes.
 
 ## Vantagens da arquitetura Feat By Packages
 
@@ -188,10 +187,6 @@ O projeto tem como gerencimento de pacotes o **Yarn** e o **Makefile** como auto
 
 <img src="./media/images/alias-tests.png" />
 
-## Deploy do projeto
-
-O serviço de cloud utilizado será o DigitalOcean. Por motivo de tempo, não foi implementado um CI/CD, entretanto, este ainda será implementado nos dias seguintes, nos serviços da CodeShip.
-
 ## Instruções para rodar a API
 
 ### Pré-requisitos
@@ -206,10 +201,10 @@ O serviço de cloud utilizado será o DigitalOcean. Por motivo de tempo, não fo
 
 ```bash
 # Para clonar repositório
-git clone https://gitlab.com/venzel/tindin.git
+git clone https://github.com/venzel/api-tindin.git
 
 # Para entrar na pasta do projeto
-cd tindin
+cd api-tindin
 
 # Renomear arquivo .env.example para .env
 cp -r .env.example .env
@@ -236,3 +231,7 @@ make seed
 # Para executar o projeto na porta 3010
 make run
 ```
+
+## Autor
+
+Enéas Almeida
